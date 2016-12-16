@@ -16,4 +16,7 @@ XYZPointcloudReduce [-n:0..9] input_file output_file
  
 Compiled binaries at:
 http://id144.org/tools/xyzpointcloudreducer.zip
+
+
+![](http://id144.org/tools/sample_screenshot.jpg)
  
