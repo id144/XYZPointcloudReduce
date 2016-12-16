@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>-n:3 testCloud.xyz testCloud_out.xyz</StartArguments>
+    <StartArguments>-n:3 krumlov_townhall_sample.xyz krumlov_townhall_sample_reduced.xyz</StartArguments>
   </PropertyGroup>
 </Project>
