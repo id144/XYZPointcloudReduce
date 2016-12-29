@@ -12,7 +12,6 @@ namespace XYZPointcloudReduce
     {
         static void Main(string[] args)
         {
-
             Console.WriteLine("XYZ Pointcloud reducer");
             Console.WriteLine("---------------------");
             Console.WriteLine("Creates a copy of a text pointcloud file with reduced precision of the floating point to decrease the file size");
@@ -47,7 +46,7 @@ namespace XYZPointcloudReduce
                 Environment.Exit(0);
             }
             FileInfo inputFileInfo = new FileInfo(inputFile);
-            long inputFileSize = inputFileInfo.Length;
+            double inputFileSize = inputFileInfo.Length;
             if (inputFileSize < 10) 
             {
                 Console.WriteLine("Input file {0} size is too small. File is probably invalid.", inputFile);
@@ -86,10 +85,11 @@ namespace XYZPointcloudReduce
                 else 
                 {
                         stringFormat += "00";
-                }
-                stringFormat += "}";
+                }                
             }
+            stringFormat += "}";
             int lineIndex = 0;
+
             using (System.IO.StreamWriter fileWrite =
                 new System.IO.StreamWriter(outputFile))
             using (System.IO.StreamReader fileRead =
@@ -127,18 +127,17 @@ namespace XYZPointcloudReduce
 
                         for (int i = 0; i < values.Length; i++)
                         {
-
                             if ((values[i] - Math.Truncate(values[i])) == 0)
                             {
-                                fileWrite.Write(
+                                    fileWrite.Write(
                                     String.Format(CultureInfo.InvariantCulture,
-                                    "{0}", values[i]));
+                                    "{0:0}", values[i])); 
                             }
                             else
                             {
-                                fileWrite.Write(
+                                 fileWrite.Write(
                                     String.Format(CultureInfo.InvariantCulture,
-                                    stringFormat, values[i]));
+                                     stringFormat, values[i])); 
 
                             }
                             if (i != values.Length - 1)
@@ -151,12 +150,13 @@ namespace XYZPointcloudReduce
                 }
             }
             FileInfo outputFileInfo = new FileInfo(outputFile);
-            long outputFileSize = outputFileInfo.Length;
+            double outputFileSize = outputFileInfo.Length;
 
-            double reductionPercentage = 100 - (outputFileSize / inputFileSize) * 100;
+            double reductionPercentage = 100 - 100 * (outputFileSize / inputFileSize) ;
+            Console.WriteLine("");
             Console.WriteLine("Input file {0} size: {1}", inputFile, inputFileSize);
-            Console.WriteLine("Input file {0} size: {1}", inputFile, inputFileSize);
-            Console.WriteLine("Reduced by {0}%", String.Format(CultureInfo.InvariantCulture,"0.00",reductionPercentage));
+            Console.WriteLine("Output file {0} size: {1}", outputFile, outputFileSize);
+            Console.WriteLine("Reduced by " + String.Format(CultureInfo.InvariantCulture,"{0:0.00}",reductionPercentage) + "%");
 
         }
         
