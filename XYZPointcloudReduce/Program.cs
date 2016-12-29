@@ -70,23 +70,20 @@ namespace XYZPointcloudReduce
 
 
             string stringFormat = "{0:0.";
-            int reductionTo = 2;
+            int reductionTo;
             var reductionArg = args.SingleOrDefault(arg => arg.Contains("-n:"));
-            if (!string.IsNullOrEmpty(reductionArg))
+            if (string.IsNullOrEmpty(reductionArg))
             {
-                reductionArg = reductionArg.Replace("-n:", "");
-                if (Int32.TryParse(reductionArg, out reductionTo))
-                {
-                    for (int i = 0; i < reductionTo; i++)
-                    {
-                        stringFormat += "0";
-                    }
-                } 
-                else 
-                {
-                        stringFormat += "00";
-                }                
+                reductionArg = "";
             }
+            reductionArg = reductionArg.Replace("-n:", "");
+            reductionTo = Int32.TryParse(reductionArg, out reductionTo)? reductionTo : 2;
+            
+            for (int i = 0; i < reductionTo; i++)
+            {
+                stringFormat += "0";
+            }           
+
             stringFormat += "}";
             int lineIndex = 0;
 
